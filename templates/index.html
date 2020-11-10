@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title>Your Todo List!</title>
+  </head>
+  <body>
+    <h2>Add To Your Todo List</h2>
+    <form action='submit' method='POST'>
+      <table>
+        <tr>
+          <td>task: <input type='text' name='task'></input></td>
+        </tr>
+        <tr>
+          <td>email: <input type='text' name='email'></input></td>
+        </tr>
+        <tr>
+          <td>
+            priority:
+            <select name="priority">
+              <option value='high'>High</option>
+              <option value='medium'>Medium</option>
+              <option value='low'>Low</option>
+            </select>
+        </td>
+        </tr>
+        <tr>
+          <td>
+            <input type='submit' value='Add Todo Item'>
+          </td>
+        </tr>
+    </table>
+  </form>
+    <h2>Here's your todo list:</h2>
+    <table>
+        {% if not todolist %}
+        <tr>
+          <td>Your list is empty!</td>
+        {% else %}
+          {% for todo in todolist %}
+          <td>{{ todo }}</td>
+          <td>
+            <form action='delete' method = 'GET'>
+              <input type="hidden" name = 'item' value = '{{ todo }}'>
+              <input type="submit" value="Delete">
+            </form>
+            </td>
+        </tr>
+            {% endfor %}
+          {% endif %}
+        <tr>
+          <td>
+            <form action="clear">
+              <input type='submit' value='Clear'>
+            </form>
+            </td>
+            <td>
+              <form action="save">
+                <input type='submit' value='Save'>
+              </form>
+              </td>
+          </tr>
+    </table>
+  </body>
+</html>
